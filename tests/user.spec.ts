@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 
 test('create and delete user', async ({ page }) => {
+  const context = await browser.newContext({ ignoreHTTPSErrors: true });
+  const page = await context.newPage();
   const baseUrl = process.env.BASE_URL || 'https://zdj-dev.local';
   await page.goto(baseUrl);
 
@@ -36,7 +38,6 @@ test('create and delete user', async ({ page }) => {
   await page.getByRole('button', { name: 'OK' }).click();
 
   // Expect the new user to be present in the users list
-  // await expect(page.getByText('mike01')).toBeVisible();
   await expect(page.getByRole('gridcell', { name: 'mike01', exact: true})).toBeVisible();
 
   // delete the created user
