@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('create and delete user', async ({ page }) => {
+test('create and delete user', async ({ browser }) => {
   const context = await browser.newContext({ ignoreHTTPSErrors: true });
   const page = await context.newPage();
   const baseUrl = process.env.BASE_URL || 'https://zdj-dev.local';
